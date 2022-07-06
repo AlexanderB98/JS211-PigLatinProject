@@ -14,6 +14,20 @@ const rl = readline.createInterface({
 const pigLatin = (word) => {
 
   // Your code here
+  // break your coe into pieces and focus on one piece at a time..
+
+  // A variable for the word the user inputs and trim the whitespace and make it lowercase.
+  let cleanWord = word.trim().toLowerCase()
+
+  // An array of vowels to compare to the word
+  let vowels = ['a', 'e', 'i', 'o', 'u']
+
+  // Find the first vowel in the word
+  let firstLeter = cleanWord.charAt(0) //cleanWord.slice(0,1)
+
+  // If the first letter is a vowel add 'yay'
+  // If the first letter is a consonant, move the letter to the end and add 'ay'
+  // If the first 2 letters are complex (i.e. th, cr, st) move both letters to the end and add 'ay'
 
 }
 
