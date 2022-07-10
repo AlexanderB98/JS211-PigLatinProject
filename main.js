@@ -11,29 +11,45 @@ const rl = readline.createInterface({
 });
 
 
+
 const pigLatin = (word) => {
-
-  // Your code here
-  // break your coe into pieces and focus on one piece at a time..
-
-  // A variable for the word the user inputs and trim the whitespace and make it lowercase.
-  let cleanWord = word.trim().toLowerCase()
-
-  // An array of vowels to compare to the word
-  let vowels = ['a', 'e', 'i', 'o', 'u']
-
-  // Find the first vowel in the word
-  let firstLeter = cleanWord.charAt(0) //cleanWord.slice(0,1)
-
-  // If the first letter is a vowel add 'yay'
-  // If the first letter is a consonant, move the letter to the end and add 'ay'
-  // If the first 2 letters are complex (i.e. th, cr, st) move both letters to the end and add 'ay'
-
+  let vowels = ['a', 'e', 'i', 'o', 'u'];
+  let finalWord = "";
+  let cleanWord = word.toLowerCase().trim()
+  if (vowels.indexOf(cleanWord[0]) > -1) {
+      finalWord = cleanWord + "yay";
+      return finalWord;
+  } else {
+    // we used a regex BOOM
+      let firstMatch = cleanWord.match(/[aeiou]/g) || 0;
+      let vowelIndex = cleanWord.indexOf(firstMatch[0]);
+      finalWord = cleanWord.substring(vowelIndex) + cleanWord.substring(0, vowelIndex) + "ay";
+      return finalWord;
+  }
 }
+
+console.log(pigLatin('Alabama'))
+
+   
+
+// if word begins with consonant
+// list the vowels: a, e, i, o, u **
+// run through string until we find the first vowel
+// identify index position, store and use
+// store sound before vowel in a variable (bucket)
+
+// splice out 'y' (first sound)
+// concat/push 'y' (first sound) to end
+
+//  concat 'ay' to the end
+
+
 
 // the first function called in the program to get an input from the user
 // to run the function use the command: node main.js
 // to close it ctrl + C
+
+
 const getPrompt = () => {
   rl.question('word ', (answer) => {
     console.log( pigLatin(answer) );
@@ -42,7 +58,7 @@ const getPrompt = () => {
 }
 
 // Unit Tests
-// to use them run the command: npm test main.js
+// You use them run the command: npm test main.js
 // to close them ctrl + C
 if (typeof describe === 'function') {
 
@@ -81,5 +97,5 @@ if (typeof describe === 'function') {
 
 // break your code into pieces and focus on one piece at a time...
 // 1. if word begins with a vowel send to one function: adds "yay"
-// 2. if word begins with a consonant send to another function: splices off beginning, returns word with new ending.
+// 2. if word begins in with a consonant send to another function: splices off beginning, returns word with new ending.
 // 3. if multiple words, create array of words, loop over them, sending them to different functions and creating a new array with the new words.
