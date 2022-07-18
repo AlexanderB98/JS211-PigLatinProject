@@ -1,60 +1,59 @@
 'use strict';
 
 // brings in the assert module for unit testing
-const assert = require('assert');
+//const assert = require('assert');
 // brings in the readline module to access the command line
-const readline = require('readline');
+//const readline = require('readline');
 // use the readline module to print out to the command line
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
 
 
 const pigLatin = (word) => {
-  let vowels = ['a', 'e', 'i', 'o', 'u'];
-  let finalWord = "";
-  let cleanWord = word.toLowerCase().trim()
-  if (vowels.indexOf(cleanWord[0]) > -1) {
-      finalWord = cleanWord + "yay";
-      return finalWord;
-  } else {
-    // we used a regex BOOM
-      let firstMatch = cleanWord.match(/[aeiou]/g) || 0;
-      let vowelIndex = cleanWord.indexOf(firstMatch[0]);
-      finalWord = cleanWord.substring(vowelIndex) + cleanWord.substring(0, vowelIndex) + "ay";
-      return finalWord;
+
+  // Your code here
+  let vowel1 = 0;
+  let found = false;
+  word = word.trim().toLowerCase();
+  let wordArr = word.split('');
+
+
+  if(wordArr[0] === 'a' || word[0] === 'e' || word[0] === 'i' || word[0] === 'o' || word[0] === 'u'){
+    console.log(word + "yay");
+    document.getElementById("outputWord").innerHTML = word + "yay";
+    return word + "yay";
+  }
+
+  else {
+    for(let i = 1; i < wordArr.length; i++){
+
+      if((wordArr[i] === 'a' || wordArr[i] === 'e' || wordArr[i] === 'i' || wordArr[i] === 'o' || wordArr[i] === 'u') && (!found)){
+        vowel1 = i;
+        found = true;
+      }
+    }
+
+    console.log(word.substring(vowel1) + word.substring(0, vowel1) + "ay");
+    document.getElementById("outputWord").innerHTML = word.slice(vowel1) + word.slice(0, vowel1) + "ay";
+    return word.substring(vowel1) + word.substring(0, vowel1) + "ay";
+
   }
 }
-
-console.log(pigLatin('Alabama'))
-
-   
-
-// if word begins with consonant
-// list the vowels: a, e, i, o, u **
-// run through string until we find the first vowel
-// identify index position, store and use
-// store sound before vowel in a variable (bucket)
-
-// splice out 'y' (first sound)
-// concat/push 'y' (first sound) to end
-
-//  concat 'ay' to the end
 
 
 
 // the first function called in the program to get an input from the user
 // to run the function use the command: node main.js
 // to close it ctrl + C
-
-
 const getPrompt = () => {
-  rl.question('word ', (answer) => {
-    console.log( pigLatin(answer) );
-    getPrompt();
-  });
+  let answer = document.getElementById("inputWord").value;
+  pigLatin(answer);
+  // rl.question('word ', (answer) => {
+  //   console.log( pigLatin(answer) );
+  //   getPrompt();
+  // });
 }
 
 // Unit Tests
